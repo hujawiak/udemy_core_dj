@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block script %}
+ <script type="text/javascript">
+
+    Stripe.setPublishableKey('pk_test_a7oEwjnDM02q00lmncPLAakc'); </script>
+    <script type="text/javascript">
+
+    Stripe.setPublishableKey('pk_test_4ZzD3dUkMiTnVLpwymISz9Uf');
+
+    function onSubmitDo () {
+
+      Stripe.card.createToken( document.getElementById('payment-form'), myStripeResponseHandler );
+
+      return false;
+
+    };
+
+    function myStripeResponseHandler ( status, response ) {
+
+      console.log( status );
+      console.log( response );
+
+      if ( response.error ) {
+        document.getElementById('payment-error').innerHTML = response.error.message;
+      } else {
+        var tokenInput = document.createElement("input");
+        tokenInput.type = "hidden";
+        tokenInput.name = "stripeToken";
+        tokenInput.value = response.id;
+
+        var paymentForm = document.getElementById('payment-form');
+        paymentForm.appendChild(tokenInput);
+
+        paymentForm.submit();
+      }
+
+   };
+
+       </script>
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+  <form class="form" action="" method="POST" id="payment-form" onsubmit="return onSubmitDo()">
+{% csrf_token %}
+        Cardholder Name
+        <input class="form-control" type="text</div>" size="20" data-stripe="name"/>
+
+        Card Number
+        <input class="form-control" type="text" size="20" data-stripe="number"/>
+
+        CVC
+        <input type="text" size="4" data-stripe="cvc"/>
+
+        Expiration (MM/YYYY)
+        <input type="text" size="2" data-stripe="exp-month"/>
+        <input type="text" size="4" data-stripe="exp-year"/>
+
+        Email Address
+        <input class="form-control" type="text" size = "25" name="emailAddress" />
+
+        Shipping Address
+        <input class="form-control" type="text" size = "3" name="shippingState" data-stripe="address_state" />
+
+        <button class="btn btn-default" type="submit">Pay $15 with Stripe</button>
+
+  </form>
+</div>
+    </div>
+
+
+{% endblock %}

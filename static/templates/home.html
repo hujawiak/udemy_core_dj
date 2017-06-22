@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head_content %}Home|{% endblock %}
+
+{% block styles %}
+<style>
+.jumbotron {
+    text-align: center;}
+</style>
+
+
+{% endblock %}
+
+{% block jumbotron %}
+<div class="jumbotron">
+        <h1>Dupa</h1>
+        <p>This is a template showcasing the optional theme stylesheet included in Bootstrap. Use it as a starting point to create something more unique by building on or modifying it.</p>
+      </div>
+
+
+        <div class="col-md-4">
+          <h2>Heading</h2>
+          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+          <p><a class="btn btn-default" href="#" role="button">View details »</a></p>
+        </div>
+
+        <div class="col-md-4">
+          <img src="{% static 'img/6422.jpeg' %}" class="img-responsive"/>
+       </div>
+
+        <div class="col-md-4">
+    {% if request.user.is_authenticated %}
+            <h2>Hello {{ request.user.username }}</h2>
+            {% else %}
+<form class="login" method="POST" action="{% url 'account_login' %}">
+  <input name="csrfmiddlewaretoken" value="5qD2kPqXsZzUyyfVIaYqy3x54iKCWLyT9bfiSbftuq3OpGNgLc6Uwv9nolYhyEKk" type="hidden">
+
+
+<div id="div_id_login" class="form-group"> <label for="id_login" class="control-label  requiredField">
+                Login<span class="asteriskField">*</span> </label> <div class="controls "> <input name="login" required="" autofocus="autofocus" class="textinput textInput form-control" placeholder="Username or e-mail" id="id_login" type="text"> </div> </div> <div id="div_id_password" class="form-group"> <label for="id_password" class="control-label  requiredField">
+                Password<span class="asteriskField">*</span> </label> <div class="controls "> <input name="password" required="" class="textinput textInput form-control" placeholder="Password" id="id_password" type="password"> </div> </div> <div class="form-group"> <div id="div_id_remember" class="checkbox"> <label for="id_remember" class=""> <input name="remember" class="checkboxinput" id="id_remember" type="checkbox">
+                    Remember Me
+                </label> </div> </div>
+
+
+  <button class="btn btn-default primaryAction" type="submit">Sign In</button>
+  <a class="btn btn-link button secondaryAction" href="{% url 'account_reset_password' %}">Forgot Password?</a>
+<a class="btn btn-link button secondaryAction" href="{% url 'account_signup' %}">Sign up</a>
+</form>
+
+{% endif %}
+        </div>
+
+
+{% endblock %}
+

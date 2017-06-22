@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{{ object }}
+{{ object.title }}
+{{ object.description }}
+{{ object.added_by }}
+
+
+{% include "single_form.html" with form=form title="Comments" btn_title="Add comment" %}
+
+{% endblock %}

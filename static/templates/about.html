@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block head_content %}About|{% endblock %}
+
+{% block head_styles %}
+h1 {
+color: green;
+}
+{% endblock %}
+
+{% block content %}
+<h1>About us</h1>
+
+<img src="{{ image_link }}"/>
+
+
+{% if success_message %}
+{{ success_message }}
+{% else %}
+<form action="" method="post">
+    {% csrf_token %}
+{{ form.as_p }}
+    <input type="submit" value="Send" />
+</form>
+{% endif %}
+
+<a href="{% url 'profiles:base_dupa' %}">Base dupa</a>
+
+{% endblock %}

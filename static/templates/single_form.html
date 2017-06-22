@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-5 col-sm-offset-3">
+
+
+<h1>{{ title }}</h1>
+
+
+{% if confirm_message %}
+{{ confirm_message }}
+{% endif %}
+
+
+{% if form %}
+<form method="post" action="">
+    {% csrf_token %}
+{{ form|crispy }}
+<input class="btn btn-default" type="submit" value="{% if btn_title %}{{ btn_title }}{% else %}Submit{% endif %}"  />
+</form>
+{% endif %}
+</div>
+</div>
+
+{% endblock %}

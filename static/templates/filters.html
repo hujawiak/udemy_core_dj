@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load filename %}
+
+{% block content %}
+
+{{ fpath|filename }}
+<br>
+{{ some_text|capfirst|linebreaks }}<br>
+{{ number|add:10 }}  {{ number|add:10|divisibleby:9 }}  {{ number|add:number }}<br>
+{{ now_date }}<br>
+{{ future_date_time }}  {{ future_date_time|timeuntil }}<br>
+{{ past_date_time }}   {{ past_date_time|timesince }}<br>
+{{ html_code|safe }}<br>
+
+{% endblock %}
